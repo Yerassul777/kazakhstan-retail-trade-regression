@@ -25,37 +25,37 @@ Full column definitions and direct links to all four source bulletins are docume
 
 ### Feature Distributions
 
-![Distributions](images/1_distributions.png)
+![Distributions](1_distributions.png)
 
 Retail trade, population, and investment are all strongly right-skewed: Almaty city's retail trade volume is approximately 160 times that of the smallest region, Ulytau. This pattern is typical of regional economic data, where city size and economic output tend to follow a power-law distribution rather than a normal one. On a raw linear scale, this skew causes a small number of large cities to dominate the variance, distorting a linear fit.
 
 ### Log Transformation
 
-![Log transform](images/1b_log_transform.png)
+![Log transform](1b_log_transform.png)
 
 `Retail_Trade`, `Population`, `Investment`, and `Income` were log-transformed prior to modeling. This converts comparisons between regions from absolute differences (millions of KZT) to proportional differences (percentage change), which is the more meaningful scale across regions differing by two orders of magnitude. It also allows the resulting regression coefficients to be interpreted directly as elasticities.
 
 ### Correlation Structure
 
-![Correlation](images/2_correlation.png)
+![Correlation](2_correlation.png)
 
 Investment (r ≈ 0.67) and population (r ≈ 0.65) show the strongest correlation with retail trade, though through distinct mechanisms. Population has a direct, near-mechanical relationship with aggregate retail trade: a larger number of residents corresponds to a larger number of transactions. Investment functions as an indicator of regional economic activity more broadly — regions attracting higher capital investment tend to have more dynamic economies overall, which is associated with higher consumption.
 
 ### Population and Income vs. Retail Trade
 
-![Scatter](images/3_scatter_population_income.png)
+![Scatter](3_scatter_population_income.png)
 
 Atyrau region, where average income is driven by the oil sector, sits above the regional income trend but not proportionally above the retail trade trend, indicating that a substantial share of regional income is not converted into local retail spending — likely flowing into savings or investment outside the region.
 
 ### Regional Comparison
 
-![Regions Dec 2025](images/4_regions_dec2025.png)
+![Regions Dec 2025](4_regions_dec2025.png)
 
 In December 2025, Almaty's retail trade volume exceeds Astana's by a factor of approximately 2.3, despite a comparatively smaller gap in population (2.3 million vs. 1.6 million). This reflects Almaty's established role as the country's primary commercial center rather than a population-driven effect.
 
 ### Inflation Over Time
 
-![CPI trend](images/5_cpi_trend.png)
+![CPI trend](5_cpi_trend.png)
 
 Year-over-year inflation remained elevated throughout the sample period (109–113%), while average nominal retail trade nearly doubled across the four periods. Because retail trade is reported in current (nominal) prices, a portion of this increase reflects rising prices rather than increased volume of goods purchased. This distinction is addressed directly in the coefficient interpretation below and in the model's limitations.
 
@@ -83,13 +83,13 @@ In real KZT terms, the test-set mean absolute error is approximately 21.1 billio
 
 > **Metric selection:** MAE and RMSE are not directly comparable to one another, as they are based on different error formulations. R² is used as the primary metric for comparing train and test performance, since it provides a single, bounded measure of explained variance.
 
-![Actual vs predicted](images/6_actual_vs_predicted.png)
+![Actual vs predicted](6_actual_vs_predicted.png)
 
 A test R² of 0.72 indicates that the model explains roughly 72% of the variance in log retail trade across the five features. The variance across cross-validation folds (0.05–0.88) is discussed in the Limitations section.
 
 ## Coefficient Interpretation
 
-![Coefficients](images/7_coefficients.png)
+![Coefficients](7_coefficients.png)
 
 Because four of the five features and the target are log-transformed, the corresponding coefficients are elasticities: the percentage change in retail trade associated with a 1% change in the feature, holding other variables constant.
 
