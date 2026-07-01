@@ -1,6 +1,6 @@
 # Predicting Regional Retail Trade in Kazakhstan
 
-multiple linear regression analysis of monthly retail trade volume across Kazakhstan's 20 administrative regions. dataset compiled from four official monthly bulletins published by the Bureau of National Statistics of the Republic of Kazakhstan (stat.gov.kz), covering February 2024 to December 2025.
+multiple linear regression analysis of monthly retail trade volume across Kazakhstan's 20 administrative regions. Dataset compiled from four official monthly bulletins published by the Bureau of National Statistics of the Republic of Kazakhstan (stat.gov.kz), covering February 2024 to December 2025.
 
 ---
 
@@ -26,7 +26,7 @@ the choice of linear regression is deliberate. a gradient-boosted tree might pre
 
 four bulletins were used: February 2024, June 2024, June 2025, and December 2025. each bulletin covers all 20 regions, including the cities of Astana, Almaty, and Shymkent. income and unemployment are published quarterly; each monthly observation was matched to the nearest available quarter.
 
-full column definitions and direct PDF links are in [`data/DATA_DICTIONARY.md`](data/DATA_DICTIONARY.md).
+full column definitions and direct PDF links are in [`data/DATA_DICTIONARY.md`](DATA_DICTIONARY.md).
 
 ---
 
@@ -34,7 +34,7 @@ full column definitions and direct PDF links are in [`data/DATA_DICTIONARY.md`](
 
 ### Feature Distributions
 
-![Distributions](images/1_distributions.png)
+![Distributions](1_distributions.png)
 
 three variables - retail trade, population, and investment - show pronounced right-skew. retail trade is the clearest case: the bulk of observations fall below 100 bln KZT, while Almaty city exceeds 1.2 trillion KZT in December 2025, roughly 160 times the volume in Ulytau.
 
@@ -44,13 +44,13 @@ CPI and unemployment are the exceptions: narrow, roughly symmetric, no transform
 
 ### Log Transformation
 
-![Log transform](images/1b_log_transform.png)
+![Log transform](1b_log_transform.png)
 
 the left panel shows retail trade in raw units; the right shows log(retail trade). after the transform, the distance between a 50 bln KZT region and a 100 bln KZT region is the same as the distance between 500 bln and 1 trillion - both are a factor of two. this is the right scale for comparing regions that differ by orders of magnitude, and what makes the coefficients readable as elasticities.
 
 ### Correlation Structure
 
-![Correlation](images/2_correlation.png)
+![Correlation](2_correlation.png)
 
 investment (r = 0.67) and population (r = 0.65) lead the table, but the near-equal values are somewhat coincidental - they drive retail trade through different channels.
 
@@ -64,7 +64,7 @@ unemployment (r = -0.16) shows the weakest effect. the regional range is only 4.
 
 ### Population and Income vs. Retail Trade
 
-![Scatter](images/3_scatter_population_income.png)
+![Scatter](3_scatter_population_income.png)
 
 the left panel shows the population relationship is close to linear in log-log space. the slope above 1 (the model estimates 1.22) means doubling a region's population is associated with more than doubling its retail trade. the excess over 1 comes from agglomeration: large cities draw retail traffic from surrounding areas, sustain more diverse retail formats, and maintain commercial density that smaller regions cannot.
 
@@ -72,13 +72,13 @@ the right panel shows income per capita. atyrau is the clearest anomaly - it sit
 
 ### Regional Comparison
 
-![Regions Dec 2025](images/4_regions_dec2025.png)
+![Regions Dec 2025](4_regions_dec2025.png)
 
 in December 2025, Almaty's retail trade exceeded Astana's by a factor of approximately 2.3, against a population ratio closer to 1.4. the gap is structural rather than demographic. almaty's wholesale and retail infrastructure - distribution centers, established chains, international brands - was built up before Astana became the capital in 1997 and has not relocated. residents of surrounding oblasts travel to Almaty for purchases unavailable locally, inflating its retail figures beyond what its resident population would produce.
 
 ### Inflation and Average Sales Over Time
 
-![CPI trend](images/5_cpi_trend.png)
+![CPI trend](5_cpi_trend.png)
 
 between February 2024 and December 2025, average nominal retail trade nearly doubled. inflation ran at 110-113% year-over-year across the same period, meaning a share of that nominal growth is higher prices rather than more goods sold. the distinction matters for the CPI coefficient: some of what the model sees as retail growth is the same basket of goods at higher prices.
 
@@ -110,7 +110,7 @@ in real KZT: test-set MAE approximately 21 bln KZT, MAPE approximately 41%
 
 R² is used as the primary metric for comparing train and test performance. MAE and RMSE are both reported but cannot be compared directly to each other because they aggregate errors differently. R² has a fixed [0, 1] scale that is consistent across both sets.
 
-![Actual vs predicted](images/6_actual_vs_predicted.png)
+![Actual vs predicted](6_actual_vs_predicted.png)
 
 test R² of 0.72 means the model captures roughly 72% of the variance in log(retail trade) using five inputs. the gap between train and test is small (0.741 vs 0.720), indicating the model generalizes rather than overfitting the training sample.
 
@@ -120,7 +120,7 @@ the residual distribution is approximately symmetric around zero - no systematic
 
 ## Coefficient Interpretation
 
-![Coefficients](images/7_coefficients.png)
+![Coefficients](7_coefficients.png)
 
 for the four log-transformed features, each coefficient is an elasticity: the percentage change in retail trade per 1% change in the feature, with all others held constant. CPI and unemployment remain in percentage-point units, so their coefficients are the absolute change in log(retail trade) per one percentage-point shift.
 
@@ -150,4 +150,4 @@ for the four log-transformed features, each coefficient is an elasticity: the pe
 
 ## Sources
 
-bureau of national statistics of the republic of Kazakhstan - [stat.gov.kz](https://stat.gov.kz/). direct links to all four source bulletins are in [`data/DATA_DICTIONARY.md`](data/DATA_DICTIONARY.md).
+bureau of national statistics of the republic of Kazakhstan - [stat.gov.kz](https://stat.gov.kz/). direct links to all four source bulletins are in [`data/DATA_DICTIONARY.md`](DATA_DICTIONARY.md).
