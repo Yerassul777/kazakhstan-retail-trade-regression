@@ -19,7 +19,7 @@ Beyond prediction accuracy, the analysis focuses on identifying which factors dr
 
 The dataset was compiled from four official monthly bulletins (February 2024, June 2024, June 2025, December 2025), each reporting retail trade volume, inflation, household income, unemployment, and capital investment for all 20 administrative regions of Kazakhstan, including the cities of Astana, Almaty, and Shymkent. Income and unemployment are published quarterly by the source; each monthly observation was matched to the nearest available quarter.
 
-Full column definitions and direct links to all four source bulletins are documented in [`data/DATA_DICTIONARY.md`](data/DATA_DICTIONARY.md).
+Full column definitions and direct links to all four source bulletins are documented in [`data/DATA_DICTIONARY.md`](DATA_DICTIONARY.md).
 
 ## Exploratory Data Analysis
 
