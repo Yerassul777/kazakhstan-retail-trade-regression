@@ -26,7 +26,7 @@ The choice of linear regression is deliberate. A gradient-boosted tree might pre
 
 Four bulletins were used: February 2024, June 2024, June 2025, and December 2025. Each bulletin reports the same set of indicators for all 20 regions, including the cities of Astana, Almaty, and Shymkent. Income and unemployment are published quarterly by the source rather than monthly; each monthly observation was matched to the nearest available quarter.
 
-Full column definitions and direct PDF links are in [`data/DATA_DICTIONARY.md`](data/DATA_DICTIONARY.md).
+Full column definitions and direct PDF links are in [`data/DATA_DICTIONARY.md`](DATA_DICTIONARY.md).
 
 ---
 
@@ -34,7 +34,7 @@ Full column definitions and direct PDF links are in [`data/DATA_DICTIONARY.md`](
 
 ### Feature Distributions
 
-![Distributions](images/1_distributions.png)
+![Distributions](1_distributions.png)
 
 Three variables - retail trade, population, and investment - show pronounced right-skew. The distribution of retail trade is the clearest example: the bulk of observations cluster below 100 bln KZT, while Almaty city exceeds 1.2 trillion KZT in December 2025, roughly 160 times the volume recorded in Ulytau.
 
@@ -44,13 +44,13 @@ CPI and unemployment are the exceptions: both are narrow, roughly symmetric, and
 
 ### Log Transformation
 
-![Log transform](images/1b_log_transform.png)
+![Log transform](1b_log_transform.png)
 
 The left panel shows retail trade in raw units. The right shows log(retail trade). The difference is meaningful beyond aesthetics: after the transform, the distance between a 50 bln KZT region and a 100 bln KZT region is the same as the distance between 500 bln and 1 trillion - both represent a factor of two. This is the right scale for comparing regions that differ by orders of magnitude, and it is the scale on which the regression coefficients become interpretable as elasticities.
 
 ### Correlation Structure
 
-![Correlation](images/2_correlation.png)
+![Correlation](2_correlation.png)
 
 Investment (r = 0.67) and population (r = 0.65) lead the correlation table, but the fact that they come out nearly equal is somewhat coincidental - they drive retail trade through different channels.
 
@@ -64,7 +64,7 @@ Unemployment (r = -0.16) shows the weakest effect. The range of unemployment acr
 
 ### Population and Income vs. Retail Trade
 
-![Scatter](images/3_scatter_population_income.png)
+![Scatter](3_scatter_population_income.png)
 
 The left panel confirms the population relationship is close to linear in log-log space - the OLS trend line fits tightly across the range. The slope being above 1 (the elasticity estimated by the model is 1.22) means that doubling a region's population is associated with more than doubling its retail trade. That excess over 1 reflects agglomeration: large cities generate retail traffic from surrounding areas, operate more diverse retail formats, and sustain higher commercial density than smaller regions.
 
@@ -72,13 +72,13 @@ The right panel shows income per capita on a log scale. Atyrau's position is the
 
 ### Regional Comparison
 
-![Regions Dec 2025](images/4_regions_dec2025.png)
+![Regions Dec 2025](4_regions_dec2025.png)
 
 In December 2025, Almaty's retail trade exceeded Astana's by a factor of approximately 2.3, despite a population ratio closer to 1.4. The gap is not primarily demographic. Almaty has historically concentrated Kazakhstan's wholesale and retail infrastructure - major distribution centers, established retail chains, and international brand presence - that were built before Astana became the capital in 1997 and have not relocated. Consumers from surrounding oblasts travel to Almaty for purchases that are unavailable locally, which further inflates its retail figures relative to its resident population.
 
 ### Inflation and Average Sales Over Time
 
-![CPI trend](images/5_cpi_trend.png)
+![CPI trend](5_cpi_trend.png)
 
 Between February 2024 and December 2025, average regional retail trade nearly doubled in nominal terms. Inflation over the same period was running at approximately 110-113% year-over-year, which means a significant share of that nominal growth reflects higher prices rather than a larger volume of goods sold. This distinction matters for interpreting the CPI coefficient in the model: what looks like growing retail trade is partly the same goods priced higher.
 
@@ -110,7 +110,7 @@ in real KZT: test-set MAE approximately 21 bln KZT, MAPE approximately 41%
 
 R² is used as the primary metric for comparing train and test performance. MAE and RMSE are both reported but cannot be compared directly to each other because they aggregate errors differently. R² has a fixed [0, 1] scale that is consistent across both sets.
 
-![Actual vs predicted](images/6_actual_vs_predicted.png)
+![Actual vs predicted](6_actual_vs_predicted.png)
 
 A test R² of 0.72 means the model captures roughly 72% of the variance in log(retail trade) using five inputs. The gap between train and test is small (0.741 vs 0.720), which indicates the model is generalizing rather than overfitting the training sample.
 
@@ -120,7 +120,7 @@ The residual distribution is approximately symmetric around zero, which confirms
 
 ## Coefficient Interpretation
 
-![Coefficients](images/7_coefficients.png)
+![Coefficients](7_coefficients.png)
 
 For the four log-transformed features, each coefficient is an elasticity: the percentage change in retail trade associated with a 1% change in that feature, with all others held constant. CPI and unemployment remain in original percentage-point units, so their coefficients represent the absolute change in log(retail trade) per one percentage-point shift.
 
