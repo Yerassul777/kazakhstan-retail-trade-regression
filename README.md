@@ -88,13 +88,7 @@ the dual-axis chart shows one clear pattern: nominal retail trade trends up cons
 
 ## Model
 
-```
-model:    LinearRegression (scikit-learn)
-features: log(population), log(income per capita), CPI YoY %,
-          log(investment), unemployment rate %
-target:   log(retail trade)
-split:    75% train / 25% test, random_state=42
-```
+the model is a standard multiple linear regression (scikit-learn) fit on log(retail trade). features: log(population), log(income per capita), CPI YoY %, log(investment), unemployment rate %. 75/25 train-test split, random_state=42.
 
 ### Results
 
